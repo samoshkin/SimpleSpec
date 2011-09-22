@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace SimpleSpec.NUnit
 {
-	public class scenario
+	public class scenario_spec
 	{
 		private readonly IList<Action> _givens = new List<Action>();
 		private Action _when;
@@ -85,4 +85,6 @@ namespace SimpleSpec.NUnit
 			}
 		}
 	}
+
+	
 }
