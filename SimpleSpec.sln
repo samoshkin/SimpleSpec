@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSpec.NUnit", "SimpleSpec\SimpleSpec.NUnit.csproj", "{73088230-15B1-4980-BB97-B01D09B81325}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.SimpleSpec", "Tests.SimpleSpec\Tests.SimpleSpec.csproj", "{44E653D8-0D11-49A8-965E-02D71E3F7B20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{73088230-15B1-4980-BB97-B01D09B81325}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73088230-15B1-4980-BB97-B01D09B81325}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73088230-15B1-4980-BB97-B01D09B81325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E653D8-0D11-49A8-965E-02D71E3F7B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E653D8-0D11-49A8-965E-02D71E3F7B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E653D8-0D11-49A8-965E-02D71E3F7B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E653D8-0D11-49A8-965E-02D71E3F7B20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

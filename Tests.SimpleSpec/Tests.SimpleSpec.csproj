@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{73088230-15B1-4980-BB97-B01D09B81325}</ProjectGuid>
+    <ProjectGuid>{44E653D8-0D11-49A8-965E-02D71E3F7B20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleSpec.NUnit</RootNamespace>
-    <AssemblyName>SimpleSpec.NUnit</AssemblyName>
+    <RootNamespace>Tests.SimpleSpec</RootNamespace>
+    <AssemblyName>Tests.SimpleSpec</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.1.5.0.0\Lib\.NetFramework 4.0\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.5.9.10348, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.5.9.10348\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -42,12 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BehaviorSpecification.cs" />
-    <Compile Include="ISpecificationFlavor.cs" />
+    <Compile Include="Samples\BillingStatistics\Billing_statistics_analyzer_spec.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\BillingStatisticsAnalyzer.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\Client.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\Currency.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\IBillingDataProvider.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\InvoiceSummary.cs" />
+    <Compile Include="Samples\BillingStatistics\Domain\Money.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioSpecification.cs" />
-    <Compile Include="specification.cs" />
-    <Compile Include="Attributes.cs" />
+    <Compile Include="Samples\BillingStatistics\Revenue_variation_calculation_spec.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleSpec\SimpleSpec.NUnit.csproj">
+      <Project>{73088230-15B1-4980-BB97-B01D09B81325}</Project>
+      <Name>SimpleSpec.NUnit</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
