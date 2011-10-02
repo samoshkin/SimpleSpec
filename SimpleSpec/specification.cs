@@ -65,8 +65,11 @@ namespace SimpleSpec.NUnit
 		public void TearDown()
 		{
 			InnerSpec.VerifyBehavior();
+			OnScenarioCleanUp();
 		}
-	
+
+		protected virtual void OnScenarioCleanUp()
+		{}
 
 		private void RunAction()
 		{
