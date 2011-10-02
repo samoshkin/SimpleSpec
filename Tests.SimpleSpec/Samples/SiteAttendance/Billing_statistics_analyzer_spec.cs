@@ -35,7 +35,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		}
 	}
 
-	[Scenario]
+	[Scenario.Spec]
 	public class when_attendance_statistics_is_being_loaded_for_the_client : with_site_attendance_analyzer
 	{
 		AttendanceSummary _june1Attendance, _june2Attendance, _june3Attendance;
@@ -55,7 +55,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			When(() => analyzer.LoadClientStatistics(resource, new DateTime(2011, 6, 1), new DateTime(2011, 6, 3)));
 		}
 
-		[Then]
+		[Behavior]
 		public void should_get_statistics_data_from_attendance_data_provider()
 		{
 			billingDataProvider.Verify();
@@ -63,7 +63,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		}
 	}
 
-	[Behavior]
+	[Behavior.Spec]
 	public class attendance_analysis_behavior : with_site_attendance_analyzer
 	{
 		public attendance_analysis_behavior()
@@ -77,7 +77,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			Given(() => analyzer.LoadClientStatistics(resource, new DateTime(2011, 7, 1), new DateTime(2011, 7, 3)));
 		}
 
-		[Then]
+		[Behavior]
 		public void should_get_attendance_info_for_given_date()
 		{
 			analyzer.GetAttendanceOn(new DateTime(2011, 7, 1)).Visits.Should().Be(10);
@@ -85,7 +85,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			analyzer.GetAttendanceOn(new DateTime(2011, 7, 4)).Visits.Should().Be(20);
 		}
 
-		[Then]
+		[Behavior]
 		public void when_getting_attendance_info_for_date_with_no_statistics_should_fail()
 		{
 			analyzer.Invoking(a => a.GetAttendanceOn(new DateTime(2011, 7, 2)))
@@ -93,7 +93,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 				.WithMessage("No attendance information on", ComparisonMode.Substring);
 		}
 
-		[Then]
+		[Behavior]
 		public void should_tell_whether_date_belongs_to_statistics_period()
 		{
 			analyzer.BelongsToPeriod(new DateTime(2011, 6, 30)).Should().BeFalse();
@@ -103,7 +103,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			analyzer.BelongsToPeriod(new DateTime(2011, 7, 4)).Should().BeFalse();
 		}
 
-		[Then]
+		[Behavior]
 		public void should_tell_whether_has_attendace_date_for_given_date()
 		{
 			analyzer.HasAttendanceDataOn(new DateTime(2011, 6, 30)).Should().BeFalse();

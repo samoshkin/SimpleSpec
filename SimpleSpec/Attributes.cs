@@ -2,15 +2,15 @@
 
 namespace SimpleSpec.NUnit
 {
-	public class ScenarioAttribute : TestFixtureAttribute
-	{ }
+	public class Scenario : TestAttribute
+	{
+		public class Spec : TestFixtureAttribute
+		{}
+	}
 
-	public class BehaviorAttribute : TestFixtureAttribute
-	{ }
-
-	public class WhenAttribute : TestAttribute
-	{ }
-
-	public class ThenAttribute : TestAttribute
-	{}
+	public class Behavior : TestAttribute
+	{
+		public class Spec : TestFixtureAttribute
+		{ }
+	}
 }

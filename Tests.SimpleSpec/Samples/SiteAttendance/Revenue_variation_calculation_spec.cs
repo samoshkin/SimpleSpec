@@ -6,7 +6,7 @@ using Tests.SimpleSpec.Samples.SiteAttendance.Domain;
 
 namespace Tests.SimpleSpec.Samples.SiteAttendance
 {
-	[Scenario]
+	[Scenario.Spec]
 	public class when_calculating_visit_count_variation : with_site_attendance_analyzer
 	{
 		double visitVariation;
@@ -23,14 +23,14 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			When(() => visitVariation = analyzer.CalculateVisitVariation(new DateTime(2011, 6, 2)));
 		}
 
-		[Then]
+		[Behavior]
 		public void should_calculate_variation_comparing_current_day_visit_count_to_previous_one()
 		{
 			visitVariation.Should().BeApproximately(-0.333, 0.001);
 		}
 	}
 
-	[Scenario]
+	[Scenario.Spec]
 	public class when_calculating_visit_count_variation_and_no_attendance_data_for_previous_day : with_site_attendance_analyzer
 	{
 		double visitVariation;
@@ -47,14 +47,14 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			When(() => visitVariation = analyzer.CalculateVisitVariation(new DateTime(2011, 6, 3)));
 		}
 
-		[Then]
+		[Behavior]
 		public void should_calculate_variation_comparing_current_day_visit_count_to_the_most_recent_date_with_data_available()
 		{
 			visitVariation.Should().BeApproximately(1.0, 0.001);
 		}
 	}
 
-	[Scenario]
+	[Scenario.Spec]
 	public class when_calculating_visit_count_variation_for_the_first_day_of_the_statistic_period : with_site_attendance_analyzer
 	{
 		public when_calculating_visit_count_variation_for_the_first_day_of_the_statistic_period()
@@ -70,14 +70,14 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			CouldFailWith<ArgumentException>();
 		}
 
-		[Then]
+		[Behavior]
 		public void should_fail()
 		{
 			Failure.Message.Should().Contain("is the first date in the period");
 		}
 	}
 
-	[Scenario]
+	[Scenario.Spec]
 	public class when_calculating_visit_count_variation_for_a_day_with_no_attendance_data : with_site_attendance_analyzer
 	{
 		public when_calculating_visit_count_variation_for_a_day_with_no_attendance_data()
@@ -93,7 +93,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			CouldFailWith<ArgumentException>();
 		}
 
-		[Then]
+		[Behavior]
 		public void should_fail()
 		{
 			Failure.Message.Should().Contain("does not have attendance statistiscs");
