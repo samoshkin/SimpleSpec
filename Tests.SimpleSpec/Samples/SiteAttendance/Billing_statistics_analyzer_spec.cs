@@ -46,7 +46,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 			_june2Attendance = new AttendanceSummary(new DateTime(2011, 6, 2), 4, TimeSpan.FromMinutes(2), 10, 123);
 			_june3Attendance = new AttendanceSummary(new DateTime(2011, 6, 3), 5, TimeSpan.FromSeconds(50), 4, 6);
 
-			IsA<ScenarioSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 				new DateTime(2011, 6, 1), 
@@ -68,7 +67,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 	{
 		public attendance_analysis_behavior()
 		{
-			IsA<BehaviorSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 			    new AttendanceSummary(new DateTime(2011, 7, 1), 10, TimeSpan.FromMinutes(1), 2, 13),

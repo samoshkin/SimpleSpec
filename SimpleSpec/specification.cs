@@ -3,12 +3,12 @@ using NUnit.Framework;
 
 namespace SimpleSpec.NUnit
 {
-	// TODO: Consider renaming this class to avoid misunderstanding between ScenarioSpecification, BehaviorSpecification
 	public class specification
 	{
 		public specification()
 		{
 			OnConstruction = true;
+			InnerSpec = ResolveSpecificationFlavor();
 		}
 
 		private ISpecificationFlavor	InnerSpec { get; set; }
@@ -17,16 +17,7 @@ namespace SimpleSpec.NUnit
 		
 		public Exception				Failure { get; private set; }
 		internal bool					OnConstruction { get; private set; }
-
 		
-		public specification IsA<TSpecificationFlavor>()
-			where TSpecificationFlavor : ISpecificationFlavor
-		{
-			InnerSpec = Activator.CreateInstance<TSpecificationFlavor>();
-			InnerSpec.SpecificationHost = this;
-			return this;
-		}
-
 		public specification CouldFailWith<TException>()
 			where TException : Exception
 		{
@@ -95,6 +86,29 @@ namespace SimpleSpec.NUnit
 			{
 				InnerSpec.RunAction();
 			}
+		}
+
+		private ISpecificationFlavor ResolveSpecificationFlavor()
+		{
+			ISpecificationFlavor supposedFlavor;
+			var specificationType = GetType();
+			if (Attribute.IsDefined(specificationType, typeof(Scenario.Spec)))
+			{
+				supposedFlavor = new ScenarioSpecification();
+			}
+			else if (Attribute.IsDefined(specificationType, typeof(Behavior.Spec)))
+			{
+				supposedFlavor = new ScenarioSpecification();
+			}
+			else
+			{
+				throw new Exception(String.Format(
+					"Fail to resolve specification flavor. Neither '{0}' or '{1}' are applied on specification class.",
+					typeof(Scenario.Spec),
+					typeof(Behavior.Spec)));
+			}
+			supposedFlavor.SpecificationHost = this;
+			return supposedFlavor;
 		}
 	}
 

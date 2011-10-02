@@ -13,7 +13,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 
 		public when_calculating_visit_count_variation()
 		{
-			IsA<ScenarioSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 				new AttendanceSummary(new DateTime(2011, 6, 1), 6, TimeSpan.FromMinutes(1), 2, 12),
@@ -37,7 +36,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 
 		public when_calculating_visit_count_variation_and_no_attendance_data_for_previous_day()
 		{
-			IsA<ScenarioSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 				new AttendanceSummary(new DateTime(2011, 6, 1), 4, TimeSpan.FromMinutes(1), 2, 12),
@@ -59,7 +57,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 	{
 		public when_calculating_visit_count_variation_for_the_first_day_of_the_statistic_period()
 		{
-			IsA<ScenarioSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 				new AttendanceSummary(new DateTime(2011, 6, 1), 4, TimeSpan.FromMinutes(1), 2, 12),
@@ -82,7 +79,6 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 	{
 		public when_calculating_visit_count_variation_for_a_day_with_no_attendance_data()
 		{
-			IsA<ScenarioSpecification>();
 			Given(attendance_statistics_analyzer);
 			Given(() => resource_attendance_statistics(
 				new AttendanceSummary(new DateTime(2011, 6, 1), 4, TimeSpan.FromMinutes(1), 2, 12),
