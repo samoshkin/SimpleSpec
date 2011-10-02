@@ -8,7 +8,7 @@ namespace SimpleSpec.NUnit
 
 		void Given(Action setupContext);
 		void When(Action action);
-		void Verify(Action behaviorSpecification);
+		void Then(Action behaviorSpecification);
 
 		void SetupContext();
 		void RunAction();

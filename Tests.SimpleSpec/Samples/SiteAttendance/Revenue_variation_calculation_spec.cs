@@ -70,7 +70,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		[Behavior]
 		public void should_fail()
 		{
-			Failure.Message.Should().Contain("is the first date in the period");
+			Then(new ScenarioShouldFail("is the first date in the period"));
 		}
 	}
 
@@ -92,7 +92,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		[Behavior]
 		public void should_fail()
 		{
-			Failure.Message.Should().Contain("does not have attendance statistiscs");
+			Then(new ScenarioShouldFail("does not have attendance statistiscs"));
 		}
 	}
 }

@@ -37,9 +37,15 @@ namespace SimpleSpec.NUnit
 			return this;
 		}
 
-		public specification Verify(Action behavior)
+		public specification Then(Action behavior)
 		{
-			InnerSpec.Verify(behavior);
+			InnerSpec.Then(behavior);
+			return this;
+		}
+
+		public specification Then(BehavioralAspect behavior)
+		{
+			InnerSpec.Then(() => behavior.Specify(this));
 			return this;
 		}
 

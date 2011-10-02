@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BehavioralAspect.cs" />
     <Compile Include="BehaviorSpecification.cs" />
     <Compile Include="ISpecificationFlavor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

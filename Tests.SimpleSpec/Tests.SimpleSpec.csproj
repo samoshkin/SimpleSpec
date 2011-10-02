@@ -55,6 +55,7 @@
     <Compile Include="Samples\SiteAttendance\Domain\AttendanceSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\SiteAttendance\Revenue_variation_calculation_spec.cs" />
+    <Compile Include="ScenarioShouldFail.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleSpec\SimpleSpec.NUnit.csproj">

@@ -32,7 +32,7 @@ namespace SimpleSpec.NUnit
 			action();
 		}
 
-		public void Verify(Action behaviorSpecification)
+		public void Then(Action behaviorSpecification)
 		{
 			if(SpecificationHost.OnConstruction)
 			{
