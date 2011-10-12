@@ -9,11 +9,13 @@ namespace SimpleSpec.NUnit
 		{
 			OnConstruction = true;
 			InnerSpec = ResolveSpecificationFlavor();
+			SetupScenarioOnlyOnce = InnerSpec is ScenarioSpecification;
 		}
 
 		private ISpecificationFlavor	InnerSpec { get; set; }
 		private bool					CouldFail { get { return ExpectedFailureType != null; } }
 		private Type					ExpectedFailureType { get; set; }
+		private bool                    SetupScenarioOnlyOnce { get; set; }
 		
 		public Exception				Failure { get; private set; }
 		internal bool					OnConstruction { get; private set; }
@@ -49,20 +51,45 @@ namespace SimpleSpec.NUnit
 			return this;
 		}
 
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
+		{
+			OnConstruction = false;
+			if(SetupScenarioOnlyOnce)
+			{
+				InnerSpec.SetupContext();
+				RunAction();    
+			}
+		}
 
 		[SetUp]
 		public void TestSetUp()
 		{
 			OnConstruction = false;
-			InnerSpec.SetupContext();
-			RunAction();
+			if(!SetupScenarioOnlyOnce)
+			{
+				InnerSpec.SetupContext();
+				RunAction();    
+			}
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
 			InnerSpec.VerifyBehavior();
-			OnScenarioCleanUp();
+			if(!SetupScenarioOnlyOnce)
+			{
+				OnScenarioCleanUp();	
+			}
+		}
+
+		[TestFixtureTearDown]
+		public void TestFixtureTearDown()
+		{
+			if (SetupScenarioOnlyOnce)
+			{
+				OnScenarioCleanUp();
+			}
 		}
 
 		protected virtual void OnScenarioCleanUp()
