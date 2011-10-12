@@ -131,7 +131,7 @@ namespace SimpleSpec.NUnit
 			}
 			else if (Attribute.IsDefined(specificationType, typeof(Behavior.Spec)))
 			{
-				supposedFlavor = new ScenarioSpecification();
+				supposedFlavor = new BehaviorSpecification();
 			}
 			else
 			{
