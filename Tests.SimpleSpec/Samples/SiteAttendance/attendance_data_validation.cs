@@ -1,5 +1,4 @@
 ﻿using System;
-using FluentAssertions;
 using SimpleSpec.NUnit;
 using Tests.SimpleSpec.Samples.SiteAttendance.Domain;
 
@@ -11,9 +10,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		public attendance_data_should_not_pass_validation()
 		{
 			Given(attendance_statistics_analyzer);
-			CouldFailWith<ValidationException>();
-
-			Then(() => Failure.Should().NotBeNull());
+			CouldFailWith<ValidationException>().Verify(ShouldFail);
 		}
 
 		[Scenario]

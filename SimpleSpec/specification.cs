@@ -51,6 +51,15 @@ namespace SimpleSpec.NUnit
 			return this;
 		}
 
+		public specification Verify(Action behavior)
+		{
+			return Then(behavior);
+		}
+
+		public specification Verify(BehavioralAspect behavior)
+		{
+			return Then(behavior);
+		}
 
 
 		[TestFixtureSetUp]
@@ -93,6 +102,22 @@ namespace SimpleSpec.NUnit
 		}
 
 
+		protected void ShouldFail()
+		{
+			Assert.That(Failure, Is.Not.Null);
+		}
+		
+		protected void ShouldFail(string containedMessage)
+		{
+			Assert.That(Failure, Is.Not.Null);
+			Assert.That(Failure.Message, Is.StringContaining(containedMessage));
+		}
+
+		protected void ShouldNotFail()
+		{
+			Assert.That(Failure, Is.Null);
+		}
+		
 
 		protected virtual void OnScenarioCleanUp()
 		{}

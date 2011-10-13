@@ -70,7 +70,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		[Behavior]
 		public void should_fail()
 		{
-			Then(new ScenarioShouldFail("is the first date in the period"));
+			Then(() => ShouldFail("is the first date in the period"));
 		}
 	}
 
@@ -92,7 +92,7 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance
 		[Behavior]
 		public void should_fail()
 		{
-			Then(new ScenarioShouldFail("does not have attendance statistiscs"));
+			Then(()=> ShouldFail("does not have attendance statistiscs"));
 		}
 	}
 }

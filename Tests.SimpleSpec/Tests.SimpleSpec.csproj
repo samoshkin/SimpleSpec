@@ -58,7 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\SiteAttendance\Domain\ValidationException.cs" />
     <Compile Include="Samples\SiteAttendance\user_visit_variation_calculation.cs" />
-    <Compile Include="ScenarioShouldFail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
