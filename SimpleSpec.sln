@@ -5,6 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSpec.NUnit", "SimpleS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.SimpleSpec", "Tests.SimpleSpec\Tests.SimpleSpec.csproj", "{44E653D8-0D11-49A8-965E-02D71E3F7B20}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B8643331-2124-4CAF-BCA3-0C0A1C62EA9F}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\VersionUpdater.exe = Shared\VersionUpdater.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
