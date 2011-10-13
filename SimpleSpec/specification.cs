@@ -7,23 +7,23 @@ namespace SimpleSpec.NUnit
 	{
 		public specification()
 		{
-			OnConstruction = true;
+			InSetupPhase = true;
 			InnerSpec = ResolveSpecificationFlavor();
 			SetupScenarioOnlyOnce = InnerSpec is ScenarioSpecification;
 		}
 
-		private ISpecificationFlavor	InnerSpec { get; set; }
-		private bool					CouldFail { get { return ExpectedFailureType != null; } }
-		private Type					ExpectedFailureType { get; set; }
-		private bool                    SetupScenarioOnlyOnce { get; set; }
-		
 		public Exception				Failure { get; private set; }
-		internal bool					OnConstruction { get; private set; }
+
+		private ISpecificationFlavor	InnerSpec { get; set; }
 		
+		internal bool					InSetupPhase { get; private set; }
+		private bool					SetupScenarioOnlyOnce { get; set; }
+		
+
 		public specification CouldFailWith<TException>()
 			where TException : Exception
 		{
-			ExpectedFailureType = typeof(TException);
+			InnerSpec.CouldFail(typeof(TException));
 			return this;
 		}
 
@@ -51,32 +51,32 @@ namespace SimpleSpec.NUnit
 			return this;
 		}
 
+
+
 		[TestFixtureSetUp]
 		public void TestFixtureSetUp()
 		{
-			OnConstruction = false;
+			InSetupPhase = false;
 			if(SetupScenarioOnlyOnce)
 			{
-				InnerSpec.SetupContext();
-				RunAction();    
+				InnerSpec.Setup();
 			}
 		}
 
 		[SetUp]
 		public void TestSetUp()
 		{
-			OnConstruction = false;
+			InSetupPhase = false;
 			if(!SetupScenarioOnlyOnce)
 			{
-				InnerSpec.SetupContext();
-				RunAction();    
+				InnerSpec.Setup();
 			}
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			InnerSpec.VerifyBehavior();
+			InnerSpec.Verify();
 			if(!SetupScenarioOnlyOnce)
 			{
 				OnScenarioCleanUp();	
@@ -92,33 +92,14 @@ namespace SimpleSpec.NUnit
 			}
 		}
 
+
+
 		protected virtual void OnScenarioCleanUp()
 		{}
 
-		private void RunAction()
+		internal void ReportFailure(Exception failure)
 		{
-			if (CouldFail)
-			{
-				try
-				{
-					InnerSpec.RunAction();	
-				}
-				catch(Exception failure)
-				{
-					if(failure.GetType().IsAssignableFrom(ExpectedFailureType))
-					{
-						Failure = failure;
-					}
-					else
-					{
-						throw;
-					}
-				}
-			}
-			else
-			{
-				InnerSpec.RunAction();
-			}
+			Failure = failure;
 		}
 
 		private ISpecificationFlavor ResolveSpecificationFlavor()

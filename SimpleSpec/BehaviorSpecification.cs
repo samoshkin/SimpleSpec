@@ -3,17 +3,14 @@ using System.Collections.Generic;
 
 namespace SimpleSpec.NUnit
 {
-	public class BehaviorSpecification : ISpecificationFlavor
+	public class BehaviorSpecification : SpecificationFlavorBase
 	{
 		private readonly IList<Action> _givens = new List<Action>();
 		private readonly IList<Action> _behaviorSpecifications = new List<Action>();
-
-		public specification SpecificationHost { get; set; }
-
 		
-		public void Given(Action setupContext)
+		public override void Given(Action setupContext)
 		{
-			if (SpecificationHost.OnConstruction)
+			if (SpecificationHost.InSetupPhase)
 			{
 				_givens.Add(setupContext);
 			}
@@ -23,18 +20,15 @@ namespace SimpleSpec.NUnit
 			}
 		}
 
-		public void When(Action action)
+		public override void When(Action action)
 		{
-			if (SpecificationHost.OnConstruction)
-			{
-				throw new InvalidOperationException("'When' action cannot be specified on construction step for behavior specification.");
-			}
-			action();
+			NotAllowedOnSetup("action");
+			RunAction(action);
 		}
 
-		public void Then(Action behaviorSpecification)
+		public override void Then(Action behaviorSpecification)
 		{
-			if(SpecificationHost.OnConstruction)
+			if(SpecificationHost.InSetupPhase)
 			{
 				_behaviorSpecifications.Add(behaviorSpecification);	
 			}
@@ -44,7 +38,7 @@ namespace SimpleSpec.NUnit
 			}
 		}
 
-		public void SetupContext()
+		public override void Setup()
 		{
 			foreach (var setupContext in _givens)
 			{
@@ -52,12 +46,7 @@ namespace SimpleSpec.NUnit
 			}
 		}
 
-		public void RunAction()
-		{
-			// Do nothing. Not applicable at this step.
-		}
-
-		public void VerifyBehavior()
+		public override void Verify()
 		{
 			foreach (var behaviorSpecification in _behaviorSpecifications)
 			{

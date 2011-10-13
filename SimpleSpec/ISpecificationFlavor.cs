@@ -9,9 +9,9 @@ namespace SimpleSpec.NUnit
 		void Given(Action setupContext);
 		void When(Action action);
 		void Then(Action behaviorSpecification);
+		void CouldFail(Type failureType);
 
-		void SetupContext();
-		void RunAction();
-		void VerifyBehavior();
+		void Setup();
+		void Verify();
 	}
 }

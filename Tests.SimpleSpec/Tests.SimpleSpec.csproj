@@ -49,13 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Samples\SiteAttendance\Billing_statistics_analyzer_spec.cs" />
+    <Compile Include="Samples\SiteAttendance\attendance_data_validation.cs" />
+    <Compile Include="Samples\SiteAttendance\attendance_statistics_analyzer.cs" />
     <Compile Include="Samples\SiteAttendance\Domain\Resource.cs" />
     <Compile Include="Samples\SiteAttendance\Domain\SiteAttendanceAnalyzer.cs" />
     <Compile Include="Samples\SiteAttendance\Domain\IAttendanceStatisticsProvider.cs" />
     <Compile Include="Samples\SiteAttendance\Domain\AttendanceSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Samples\SiteAttendance\Revenue_variation_calculation_spec.cs" />
+    <Compile Include="Samples\SiteAttendance\Domain\ValidationException.cs" />
+    <Compile Include="Samples\SiteAttendance\user_visit_variation_calculation.cs" />
     <Compile Include="ScenarioShouldFail.cs" />
   </ItemGroup>
   <ItemGroup>

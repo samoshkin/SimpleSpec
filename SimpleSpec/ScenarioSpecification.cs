@@ -3,67 +3,55 @@ using System.Collections.Generic;
 
 namespace SimpleSpec.NUnit
 {
-	public class ScenarioSpecification : ISpecificationFlavor
+	public class ScenarioSpecification : SpecificationFlavorBase
 	{
 		private readonly IList<Action> _givens = new List<Action>();
 		private Action _when;
 
-		public specification SpecificationHost { get; set; }
-
-		public void Given(Action setupContext)
+		public override void Given(Action setupContext)
 		{
-			if(!SpecificationHost.OnConstruction)
-			{
-				throw new InvalidOperationException("Scenario context must be setup only on construction step.");
-			}
+			NotAllowedOnVerification("scenario context");
 			_givens.Add(setupContext);
 		}
 
-		public void When(Action action)
+		public override void When(Action action)
 		{
-			if(SpecificationHost.OnConstruction)
+			if(SpecificationHost.InSetupPhase)
 			{
 				if (_when != null)
 				{
-					throw new InvalidOperationException("Scenario could have only zero or one 'When' action.");
+					throw new InvalidOperationException("When action could be specified only once per scenario.");
 				}
 				_when = action;	
 			}
 			else
 			{
-				action();
+				RunAction(action);
 			}
 		}
 
-		public void Then(Action behaviorSpecification)
+		public override void Then(Action behaviorSpecification)
 		{
-			if (SpecificationHost.OnConstruction)
-			{
-				throw new InvalidOperationException("Scenario behavior could not be specified on construction step.");
-			}
+			NotAllowedOnSetup("behavior");
 			behaviorSpecification();
 		}
-
-
-		public void SetupContext()
+		
+		public override void Setup()
 		{
 			foreach (var contextSetupAction in _givens)
 			{
 				contextSetupAction();
 			}
-		}
-
-		public void RunAction()
-		{
 			if (_when != null)
 			{
-				_when();
+				RunAction(_when);
 			}
 		}
 
-		public void VerifyBehavior()
+		public override void Verify()
 		{
-			// Do nothing. Behavior verification step is not applicable in scenario specification.
+			// Do nothing. 
+			// Behavior verification is performed directly from user code, or by calling Then() with behavior verification delegate.
 		}
 	}
 }

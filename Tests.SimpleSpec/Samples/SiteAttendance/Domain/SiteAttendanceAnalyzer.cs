@@ -50,6 +50,27 @@ namespace Tests.SimpleSpec.Samples.SiteAttendance.Domain
 			return _dayAttendanceStatistics[startOfTheDay];
 		}
 
+		public void Validate(double variationThreshold)
+		{
+			var firstDay = _dayAttendanceStatistics.Keys.First();
+			var lastDay = _dayAttendanceStatistics.Keys.Last();
+			var totalDayCount = _dayAttendanceStatistics.Count;
+
+			if(lastDay.Subtract(firstDay).TotalDays + 1 != totalDayCount)
+			{
+				throw new ValidationException("Statistics is not contiguous. Data is missing on some days.");
+			}
+
+			var violatesThreshold = _dayAttendanceStatistics.Keys
+				.Skip(1)
+				.Select(CalculateVisitVariation)
+				.Where(variation => Math.Abs(variation) > variationThreshold)
+				.Any();
+			if(violatesThreshold)
+			{
+				throw new ValidationException("Actual visit variation violates given threshold.");
+			}
+		}
 		
 		public virtual double CalculateVisitVariation(DateTime day)
 		{
