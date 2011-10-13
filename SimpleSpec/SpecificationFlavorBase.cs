@@ -2,7 +2,7 @@
 
 namespace SimpleSpec.NUnit
 {
-	public abstract class SpecificationFlavorBase : ISpecificationFlavor
+	internal abstract class SpecificationFlavorBase : ISpecificationFlavor
 	{
 		public abstract void Given(Action setupContext);
 		public abstract void When(Action action);

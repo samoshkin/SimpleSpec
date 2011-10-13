@@ -2,7 +2,7 @@
 
 namespace SimpleSpec.NUnit
 {
-	public interface ISpecificationFlavor
+	internal interface ISpecificationFlavor
 	{
 		specification SpecificationHost { get; set; }
 

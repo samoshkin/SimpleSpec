@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SimpleSpec.NUnit
 {
-	public class BehaviorSpecification : SpecificationFlavorBase
+	internal class BehaviorSpecification : SpecificationFlavorBase
 	{
 		private readonly IList<Action> _givens = new List<Action>();
 		private readonly IList<Action> _behaviorSpecifications = new List<Action>();

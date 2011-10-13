@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SimpleSpec.NUnit
 {
-	public class ScenarioSpecification : SpecificationFlavorBase
+	internal class ScenarioSpecification : SpecificationFlavorBase
 	{
 		private readonly IList<Action> _givens = new List<Action>();
 		private Action _when;
