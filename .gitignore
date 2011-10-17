@@ -44,3 +44,8 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+# Nuget package folders
+/packages/*
+!repositories.config
+
